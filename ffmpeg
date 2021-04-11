@@ -22,5 +22,5 @@ echo $COMMAND >> /var/log/myffmpeg
 
 PROCESS_FFMPEG=$!
 
-echo "Esperando finalización del proceso: ${PROCESO_FFMPEG}."
+echo "Waiting for process completion: ${PROCESS_FFMPEG}."
 wait $PROCESS_FFMPEG
