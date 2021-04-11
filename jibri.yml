@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+    jibri:
+        image: prayagsingh/jibri:pulse_v2.1
+        restart: "on-failure"
+        volumes:
+            - ./config:/config:Z
+            #- ./config/rclone/rclone.conf:/home/jibri/.config/rclone/rclone.conf
+            - /dev/shm:/dev/shm
+        cap_add:
+            - SYS_ADMIN
+            - NET_BIND_SERVICE
+              #devices:
+              #- /dev/snd:/dev/snd
+        extra_hosts:
+            - "meet.example.com:1.2.3.4" # update_this
+        environment:
+            XMPP_SERVER: "xmpp.meet.example.com"
+            XMPP_DOMAIN: "meet.example.com"
+            XMPP_AUTH_DOMAIN: "auth.meet.example.com"
+            XMPP_BOSH_URL_BASE: "http://xmpp.meet.example.com:5280"
+            XMPP_GUEST_DOMAIN: "guest.meet.example.com"
+            XMPP_MUC_DOMAIN: "muc.meet.example.com"
+            XMPP_INTERNAL_MUC_DOMAIN: "internal-muc.meet.example.com"
+            XMPP_RECORDER_DOMAIN: "recorder.meet.example.com"
+            TZ: "Asia/Kolkata"
+            JIBRI_BREWERY_MUC: "jibribrewery"
+            JIBRI_PENDING_TIMEOUT: "90"
+            JIBRI_XMPP_USER: "jibri"
+            JIBRI_XMPP_PASSWORD: "password"
+            JIBRI_RECORDER_USER: "recorder"
+            JIBRI_RECORDER_PASSWORD: "password"
+            DISPLAY: ":0"
+            JIBRI_RECORDING_DIR: "/config/jibri/recording"
+            JIBRI_FINALIZE_RECORDING_SCRIPT_PATH: "/config/jibri/finalize.sh"
+            JIBRI_STRIP_DOMAIN_JID: "muc"
+            JIBRI_LOGS_DIR: "/config/jibri/logs"
+            # new config
+            ENABLE_JIBRI_HTTP_API_PORT: 1
+            JIBRI_HTTP_API_EXTERNAL_PORT: 2222
+            JIBRI_HTTP_API_INTERNAL_PORT: 3333
+            JIBRI_USAGE_TIMEOUT: 0
+            XMPP_TRUST_ALL_CERTS: "true"
+            CHROMIUM_FLAGS: "--use-fake-ui-for-media-stream,--start-maximized,--kiosk,--enabled,--disable-infobars,--autoplay-policy=no-user-gesture-required"
+            ENABLE_STATS_D: "true"
+            JIBRI_FFMPEG_RESOLUTION: "1920x1080"
+            JIBRI_FFMPEG_AUDIO_SOURCE: "pulse"
+            JIBRI_FFMPEG_AUDIO_DEVICE: "default"
+        networks:
+            jitsi:
+networks:
+    jitsi:
+      external: true
