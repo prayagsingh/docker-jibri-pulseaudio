@@ -1,4 +1,4 @@
-ARG JITSI_REPO=prayagsingh
+ARG JITSI_REPO=jitsi
 FROM ${JITSI_REPO}/base-java
 
 #ARG CHROME_RELEASE=latest
@@ -14,8 +14,6 @@ ENV RCLONE_VER=1.55.0 \
     PARAMS=""
 
 LABEL build_version="Version:- ${RCLONE_VER} Build-date:- ${BUILD_DATE}"
-
-LABEL Prayag Singh
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
