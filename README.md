@@ -15,7 +15,8 @@
 ### FILES
 
 1. Use `jibri.yml` with docker-compose.
-2. Use `stack-jibri.yml` with `docker stack deploy`. 
+2. Use `stack-jibri.yml` with `docker stack deploy`.
+3. Look for `update_this` and change the value accordingly. Also change `meet.example.com` with a valid URL.
 
 ***NOTE:*** Here I'm using `external` network in both the files. Please change it accordingly. 
 
