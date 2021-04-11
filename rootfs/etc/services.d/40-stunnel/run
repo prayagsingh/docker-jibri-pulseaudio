@@ -1,0 +1,7 @@
+#!/usr/bin/with-contenv bash
+
+# we have to set it, otherwise chrome won't find ~/.asoundrc file
+#HOME=/home/jibri
+
+exec /usr/bin/startstunnel
+

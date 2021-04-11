@@ -1,0 +1,26 @@
+#!/bin/bash
+
+COMMAND="/usr/bin/ffmpeg3" 
+
+while test $# -gt 0
+do
+    T="$1"
+    if [ "${1:0:41}" == "rtmps://live-api-s.facebook.com:443/rtmp/" ]; then
+        # T  will contain the rtmp key from jitsi meet page. Make sure you use the correct IP Address OF the rtmp server you setup earlier
+        COMMAND="$COMMAND rtmp://127.0.0.1:1936/rtmp/${T:41}"
+    else
+        COMMAND="$COMMAND $T"
+    fi
+    shift
+done
+
+echo "RUNNING FFMPEG: «$COMMAND»."
+
+exec $COMMAND
+echo $COMMAND >> /var/log/myffmpeg
+
+
+PROCESS_FFMPEG=$!
+
+echo "Esperando finalización del proceso: ${PROCESO_FFMPEG}."
+wait $PROCESS_FFMPEG

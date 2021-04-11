@@ -1,0 +1,24 @@
+#!/bin/bash
+
+ARGS=$@
+RDIR="/config/jibri/recording/"
+
+#-y -v info -f x11grab -draw_mouse 0 -r 30 -s 1280x720 -thread_queue_size 4096 -i :0.0+0,0 -f alsa -thread_queue_size 4096 -i plug:bsnoop -acodec aac -strict -2 -ar 44100 -b:a 128k -af aresample=async=1 -c:v libx264 -preset veryfast -maxrate 2976k -bufsize 5952k -pix_fmt yuv420p -r 30 -crf 25 -g 60 -tune zerolatency -f flv rtmp://a.rtmp.youtube.com/live2/rh7j-md0d-zgad-qqx8-6x2p
+
+# if [[ -n "$(echo $ARGS | grep 'rtmp')" ]]; then
+
+#     STREAM="streams"
+#     #STREAM=$(echo $ARGS | egrep -o '[^/]*$')
+#     SUID=`date +${STREAM}/%d_%m_%y_%H%M%S`
+#     SUID2=`date +%d_%m_%y_%H%M%S`
+#     SUBDIR="$RDIR/$SUID"
+#     mkdir -p $SUBDIR
+#     FILE="$SUBDIR/$SUID2.mp4"
+#     echo $FILE >> ~/args 
+#     ARGS="$ARGS -acodec aac -strict -2 -ar 44100"
+#     ARGS="$ARGS -c:v libx264 -preset veryfast -profile:v main -level 3.1"                                                              
+#     ARGS="$ARGS -pix_fmt yuv420p -r 30 -crf 25 -g 60 -tune zerolatency"                                                                
+#     ARGS="$ARGS -f mp4 $FILE"
+# fi
+
+exec /usr/bin/ffmpeg3 $ARGS
