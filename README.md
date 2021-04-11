@@ -1,6 +1,8 @@
 # jibri-pulseaudio
 
-#### Run Jibri using PulseAudio. Try `prayagsingh/jibri:pulse_v2.1` docker image.
+#### Run Jibri using PulseAudio.
+
+#### Try `prayagsingh/jibri:pulse_v2.1` docker image. Using unstable build. 
 
 #### Inbuilt Support for streaming to any rtmp server and to facebook too(one at a time). 
 
@@ -20,4 +22,4 @@
 ### SETUP tested 
 1. docker-compose 
 2. docker-swarm
-3. k8s (WIP) 
+3. k8s (WIP)
