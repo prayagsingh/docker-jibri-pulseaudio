@@ -9,3 +9,15 @@
 #### Tested with docker-compose and docker-swarm setup. 
 
 **NOTE: It is mandatory to map `/dev/shm` else chrome crashes with screen-sharing**
+
+### FILES
+
+1. Use `jibri.yml` with docker-compose.
+2. Use `stack-jibri.yml` with `docker stack deploy`. 
+
+***NOTE:*** Here I'm using `external` network in both the files. Please change it accordingly. 
+
+### SETUP tested 
+1. docker-compose 
+2. docker-swarm
+3. k8s (WIP) 
