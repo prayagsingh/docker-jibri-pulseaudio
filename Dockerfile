@@ -100,14 +100,11 @@ RUN chmod +x /usr/bin/startstunnel && \
     mkdir -p /opt/util/
 
 COPY ffmpeg /opt/util/ffmpeg
-#COPY ffmpeg2 /opt/util/ffmpeg2
 
 # ffmpeg3 is the original ffmpeg
 RUN mv /usr/bin/ffmpeg /usr/bin/ffmpeg3 && \
     ln -s /opt/util/ffmpeg /usr/bin/ffmpeg && \
     chmod +x /usr/bin/ffmpeg
-#    ln -s /opt/util/ffmpeg2 /usr/bin/ffmpeg2 && \
-#    chmod +x /usr/bin/ffmpeg2
 
 # changing /home/jibri permission because of pulseaudio. we can not run pulseaudio daemon with jibri user without changing permission
 RUN chown -R jibri:jibri /home/jibri
