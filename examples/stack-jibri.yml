@@ -3,7 +3,7 @@ version: '3.8'
 services:
     # Video bridge
     jibri:
-        image:  prayagsingh/jibri:pulse_v2.1
+        image:  prayagsingh/jibri:pulse_v2.2
         ports:
           - target: 3333
             published: 3333
