@@ -1,4 +1,4 @@
-# jibri-pulseaudio
+# Docker Jibri Pulseaudio
 
 #### Run Jibri using PulseAudio.
 
