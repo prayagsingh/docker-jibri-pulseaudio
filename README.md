@@ -10,7 +10,7 @@
 
 #### Tested with docker-compose and docker-swarm setup. 
 
-**NOTE: It is mandatory to map `/dev/shm` else chrome crashes when screen-share is enabled**
+**NOTE 1: It is mandatory to map `/dev/shm` else chrome crashes when screen-share is enabled**
 
 ### FILES
 
@@ -19,7 +19,9 @@
 3. TODO add k8s files 
 4. Look for `update_this` and change the value accordingly. Also change `meet.example.com` with a valid URL.
 
-***NOTE:*** Here I'm using `external` network in both the files. Please change it accordingly. 
+***NOTE 2:*** Here I'm using `external` network in both the files. Please change it accordingly. 
+
+***NOTE 3:*** Please take the necessary steps to secure the AWS keys when using with rclone. 
 
 ### SETUP tested 
 1. **docker-compose:** working with `1920x1080` 
