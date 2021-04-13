@@ -16,6 +16,12 @@ services:
         extra_hosts:
             - "meet.example.com:1.2.3.4" # update_this
         environment:
+            # rclone config
+            ENABLE_RCLONE: 0 # false by default
+            AWS_ACCESS_KEY_ID: "" 
+            AWS_SECRET_ACCESS_KEY: ""
+            RCLONE_AWS_REGION: ""
+            # jibri config
             XMPP_SERVER: "xmpp.meet.example.com"
             XMPP_DOMAIN: "meet.example.com"
             XMPP_AUTH_DOMAIN: "auth.meet.example.com"

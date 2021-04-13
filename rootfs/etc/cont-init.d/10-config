@@ -43,6 +43,12 @@ su -c "/home/jibri/.config/pulse/start-pulseaudio.sh" jibri
 tpl /defaults/jibri.conf > /etc/jitsi/jibri/jibri.conf
 tpl /defaults/logging.properties > /etc/jitsi/jibri/logging.properties
 
+# if rclone is enabled then populate the values
+if [ $ENABLE_RCLONE -eq 1 ]; then
+      tpl /defaults/rclone.conf > /home/jibri/.config/rclone/rclone.conf
+      chown jibri:jibri /home/jibri/.config/rclone/rclone.conf
+fi
+
 # make recording dir
 [ -z "${JIBRI_RECORDING_DIR}" ] && export JIBRI_RECORDING_DIR=/config/recordings
 mkdir -p ${JIBRI_RECORDING_DIR}
