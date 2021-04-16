@@ -1,4 +1,4 @@
-ARG JITSI_REPO=jitsi
+ARG JITSI_REPO=prayagsingh
 FROM ${JITSI_REPO}/base-java
 
 #ARG CHROME_RELEASE=latest
