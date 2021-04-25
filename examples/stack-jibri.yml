@@ -3,7 +3,7 @@ version: '3.8'
 services:
     # Video bridge
     jibri:
-        image:  prayagsingh/jibri:pulse_v2.2
+        image:  prayagsingh/jibri-pulseaudio:latest
         ports:
           - target: 3333
             published: 3333
@@ -23,12 +23,12 @@ services:
             condition: on-failure
             delay: 5s
             #max_attempts: 5
-          placement:
-            constraints:
-              - "node.hostname==jibri" # update_this
+          # placement:
+          #   constraints:
+          #     - "node.hostname==jibri" # update_this
 
         #healthcheck:
-        #    test: curl 127.0.0.1:8080/about/health || exit 1
+        #    test: curl 127.0.0.1:2222/jibri/api/v1.0/health || exit 1
         #    interval: 6s
         #    timeout: 6s
         #    retries: 3

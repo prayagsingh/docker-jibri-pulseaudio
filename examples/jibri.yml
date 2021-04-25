@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
     jibri:
-        image: prayagsingh/jibri:pulse_v2.2
+        image: prayagsingh/jibri-pulseaudio:latest
         restart: "on-failure"
         volumes:
             - ./config:/config:Z
