@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- jibri-env-configmap.yaml
+- jibri-files-configmap.yaml
+- jibri-secret.yaml
+- jibri-service.yaml
+- jibri-stateful.yaml
+
+commonLabels:
+  scope: jitsi

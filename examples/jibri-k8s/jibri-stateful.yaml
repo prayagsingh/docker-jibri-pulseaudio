@@ -1,0 +1,138 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: jitsi
+  name: jibri
+  labels:
+    k8s-app: jibri
+spec:
+  serviceName: jibri
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: jibri
+  template:
+    metadata:
+      labels:
+        k8s-app: jibri
+    spec:
+      # update_this : comment out affinity part incase you don't want to use it. 
+      affinity:
+        # separating worker-pool between jibri and rest of the deployment. << update_this >> in case of running it on 
+        # different cloud infrastructure
+        nodeAffinity:
+           requiredDuringSchedulingIgnoredDuringExecution:
+             nodeSelectorTerms:
+             - matchExpressions:
+               - key: ibm-cloud.kubernetes.io/worker-pool-name
+                 operator: In
+                 values:
+                 - jibri-pool
+      hostAliases:
+        - ip: '1.2.3.4' # update_this 
+          hostnames:
+            - meet.example.com # update_this
+      securityContext:
+        fsGroup: 63 
+      containers:
+        - name: prometheus-exporter
+          # sidecar container that exports stats for prometheus
+          image: prayagsingh/prometheus-jibri-exporter:1.3.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: metrics
+              containerPort: 9889
+          args:
+            - "-jibri-status-url"
+            - "http://localhost:2222/jibri/api/v1.0/health"
+
+        - name: jibri
+          image: prayagsingh/jibri:pulse_v2.2
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: '4G'
+              cpu: '4'
+            requests:
+              memory: '2G'
+              cpu: '2'
+          envFrom:
+            - configMapRef:
+                name: jibri-env
+          env:
+            - name: JIBRI_XMPP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: jibri-secrets
+                  key: JIBRI_XMPP_PASSWORD
+            - name: JIBRI_RECORDER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: jibri-secrets
+                  key: JIBRI_RECORDER_PASSWORD
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: jibri-secrets
+                  key: AWS_ACCESS_KEY_ID
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jibri-secrets
+                  key: AWS_SECRET_ACCESS_KEY
+            - name: RCLONE_AWS_REGION
+              valueFrom:
+                secretKeyRef:
+                  name: jibri-secrets
+                  key: RCLONE_AWS_REGION
+          volumeMounts:
+            - name: dev-shm
+              mountPath: /dev/shm
+            - name: jibri-files
+              mountPath: /config/jibri/finalize.sh
+              subPath: finalize.sh
+              readOnly: false
+            - name: jibri-files
+              mountPath: /etc/jitsi/jibri/xorg-video-dummy.conf
+              subPath: xorg-video-dummy.conf
+              readOnly: false
+            - name: jibri-files
+              mountPath: /defaults/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
+            - name: jibri-files
+              mountPath: /etc/cont-init.d/10-config
+              subPath: 10-config
+              readOnly: false
+          securityContext:
+            privileged: true
+            capabilities:
+              add:
+                - NET_BIND_SERVICE
+                - SYS_ADMIN
+      volumes:
+        - name: jibri-recorder
+          emptyDir: {}
+        - name: jibri-logs
+          emptyDir: {}
+        - name: jibri-files
+          configMap:
+            name: jibri-files
+            items:
+              - key: finalize.sh
+                path: finalize.sh
+                mode: 0755
+              - key: xorg-video-dummy.conf
+                path: xorg-video-dummy.conf
+                mode: 0744
+              - key: rclone.conf
+                path: rclone.conf
+                mode: 0744
+              - key: 10-config
+                path: 10-config
+                mode: 0744
+        - name: dev-shm
+          hostPath:
+            path: "/dev/shm"
+            type: Directory
+

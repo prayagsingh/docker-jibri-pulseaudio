@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jibri-env
+  namespace: jitsi
+data:
+  ENABLE_RCLONE: "1"
+  XMPP_SERVER: prosody
+  XMPP_DOMAIN: meet.example.com
+  XMPP_AUTH_DOMAIN: auth.meet.example.com
+  XMPP_BOSH_URL_BASE: "http://prosody:5280"
+  XMPP_GUEST_DOMAIN: "guest.meet.example.com"
+  XMPP_MUC_DOMAIN: "muc.meet.example.com"
+  XMPP_INTERNAL_MUC_DOMAIN: "internal-muc.meet.example.com"
+  XMPP_RECORDER_DOMAIN: "recorder.meet.example.com"
+  TZ: "Asia/Kolkata"
+  JIBRI_BREWERY_MUC: "jibribrewery"
+  JIBRI_PENDING_TIMEOUT: "90"
+  JIBRI_XMPP_USER: jibri
+  JIBRI_RECORDER_USER: recorder
+  DISPLAY: :0
+  JIBRI_RECORDING_DIR: "/config/jibri/recording"
+  JIBRI_FINALIZE_RECORDING_SCRIPT_PATH: /config/jibri/finalize.sh
+  JIBRI_STRIP_DOMAIN_JID: muc
+  JIBRI_LOGS_DIR: /config/jibri/logs  
+  # new config
+  ENABLE_JIBRI_HTTP_API_PORT: "1"
+  JIBRI_HTTP_API_EXTERNAL_PORT: "2222"
+  JIBRI_HTTP_API_INTERNAL_PORT: "3333"
+  JIBRI_USAGE_TIMEOUT: "0"
+  XMPP_TRUST_ALL_CERTS: "true"
+  CHROMIUM_FLAGS: "--use-fake-ui-for-media-stream,--start-maximized,--kiosk,--enabled,--disable-infobars,--autoplay-policy=no-user-gesture-required,--no-sandbox,–disable-dev-shm-usage"
+  ENABLE_STATS_D: "true"
+  JIBRI_FFMPEG_RESOLUTION: "1280x720" #"1920x1080"
+  JIBRI_FFMPEG_AUDIO_SOURCE: "pulse"
+  JIBRI_FFMPEG_AUDIO_DEVICE: "default"
