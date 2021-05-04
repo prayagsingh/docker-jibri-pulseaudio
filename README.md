@@ -14,9 +14,9 @@
 
 ### FILES
 
-1. Use `jibri.yml` with docker-compose.
-2. Use `stack-jibri.yml` with `docker stack deploy`.
-3. TODO add k8s files 
+1. Use `examples/jibri.yml` with docker-compose.
+2. Use `examples/stack-jibri.yml` with `docker stack deploy`.
+3. Use `examples/jibri-k8s` directory to setup jibri on k8s. Replace `1.2.3.4` with public-IP in `examples/jibri-k8s/jibri-stateful.yaml` file. Use `examples/jibri-k8s/kustomization.yaml` for deployment. `Kustomize` version is `v4.0.5`.
 4. Look for `update_this` and change the value accordingly. Also change `meet.example.com` with a valid URL.
 
 ***NOTE 2:*** Here I'm using `external` network in both the files. Please change it accordingly. 
