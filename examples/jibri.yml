@@ -13,8 +13,8 @@ services:
             - NET_BIND_SERVICE
               #devices:
               #- /dev/snd:/dev/snd
-        extra_hosts:
-            - "meet.example.com:1.2.3.4" # update_this
+        # extra_hosts:
+        #     - "meet.example.com:1.2.3.4" # update_this
         environment:
             # rclone config
             ENABLE_RCLONE: 0 # false by default
@@ -53,6 +53,8 @@ services:
             JIBRI_FFMPEG_RESOLUTION: "1920x1080"
             JIBRI_FFMPEG_AUDIO_SOURCE: "pulse"
             JIBRI_FFMPEG_AUDIO_DEVICE: "default"
+            PUBLIC_URL: ""
+            XORG_DUMMY_VIDEO_RESOLUTION: "1280 720"
         networks:
             jitsi:
 networks:

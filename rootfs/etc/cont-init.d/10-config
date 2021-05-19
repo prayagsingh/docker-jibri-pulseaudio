@@ -49,6 +49,9 @@ if [ $ENABLE_RCLONE -eq 1 ]; then
       chown jibri:jibri /home/jibri/.config/rclone/rclone.conf
 fi
 
+# change the resolution in xorg-video-dummy file
+sed -i -e "s/Virtual 1920 1080/Virtual ${XORG_DUMMY_VIDEO_RESOLUTION}/g" /etc/jitsi/jibri/xorg-video-dummy.conf
+
 # make recording dir
 [ -z "${JIBRI_RECORDING_DIR}" ] && export JIBRI_RECORDING_DIR=/config/recordings
 mkdir -p ${JIBRI_RECORDING_DIR}

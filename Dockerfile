@@ -1,14 +1,14 @@
 ARG JITSI_REPO=jitsi
-ARG BASE_TAG=latest
+ARG BASE_TAG=unstable-2021-05-19
 FROM ${JITSI_REPO}/base-java:${BASE_TAG}
 
 #ARG CHROME_RELEASE=latest
 #ARG CHROMEDRIVER_MAJOR_RELEASE=latest
-ARG CHROME_RELEASE=78.0.3904.97
-ARG CHROMEDRIVER_MAJOR_RELEASE=78
+ARG CHROME_RELEASE=90.0.4430.212
+ARG CHROMEDRIVER_MAJOR_RELEASE=90
 
-ENV RCLONE_VER=1.55.0 \
-    BUILD_DATE=20210405T131603 \
+ENV RCLONE_VER=1.55.1 \
+    BUILD_DATE=20210519T131603 \
     ARCH=amd64 \
     SUBCMD="" \
     CONFIG="--config /config/rclone/rclone.conf" \
@@ -19,9 +19,9 @@ LABEL build_version="Version:- ${RCLONE_VER} Build-date:- ${BUILD_DATE}"
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 RUN \
-        apt-dpkg-wrap apt-get update \
-        && apt-dpkg-wrap apt-get install -y jibri pulseaudio socat dbus dbus-x11 rtkit libgl1-mesa-dri procps unzip wget stunnel4 \
-        && apt-cleanup
+    apt-dpkg-wrap apt-get update \
+    && apt-dpkg-wrap apt-get install -y jibri pulseaudio socat dbus dbus-x11 rtkit libgl1-mesa-dri procps unzip wget stunnel4 \
+    && apt-cleanup
 
 RUN \
 	[ "${CHROME_RELEASE}" = "latest" ] \
@@ -33,26 +33,26 @@ RUN \
 	|| true
 
 RUN \
-        [ "${CHROME_RELEASE}" != "latest" ] \
-        && curl -4so "/tmp/google-chrome-stable_${CHROME_RELEASE}-1_amd64.deb" "http://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${CHROME_RELEASE}-1_amd64.deb" \
-        && apt-dpkg-wrap apt-get update \
-        && apt-dpkg-wrap apt-get install -y "/tmp/google-chrome-stable_${CHROME_RELEASE}-1_amd64.deb" \
-        && apt-cleanup \
-        || true
+    [ "${CHROME_RELEASE}" != "latest" ] \
+    && curl -4so "/tmp/google-chrome-stable_${CHROME_RELEASE}-1_amd64.deb" "http://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${CHROME_RELEASE}-1_amd64.deb" \
+    && apt-dpkg-wrap apt-get update \
+    && apt-dpkg-wrap apt-get install -y "/tmp/google-chrome-stable_${CHROME_RELEASE}-1_amd64.deb" \
+    && apt-cleanup \
+    || true
 
 RUN \
-        [ "${CHROMEDRIVER_MAJOR_RELEASE}" = "latest" ] \
-        && CHROMEDRIVER_RELEASE="$(curl -4Ls https://chromedriver.storage.googleapis.com/LATEST_RELEASE)" \
-        || CHROMEDRIVER_RELEASE="$(curl -4Ls https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROMEDRIVER_MAJOR_RELEASE})" \
-        && curl -4Ls "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_RELEASE}/chromedriver_linux64.zip" \
-        | zcat >> /usr/bin/chromedriver \
-        && chmod +x /usr/bin/chromedriver \
-        && chromedriver --version
+    [ "${CHROMEDRIVER_MAJOR_RELEASE}" = "latest" ] \
+    && CHROMEDRIVER_RELEASE="$(curl -4Ls https://chromedriver.storage.googleapis.com/LATEST_RELEASE)" \
+    || CHROMEDRIVER_RELEASE="$(curl -4Ls https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROMEDRIVER_MAJOR_RELEASE})" \
+    && curl -4Ls "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_RELEASE}/chromedriver_linux64.zip" \
+    | zcat >> /usr/bin/chromedriver \
+    && chmod +x /usr/bin/chromedriver \
+    && chromedriver --version
 
 RUN \
-        apt-dpkg-wrap apt-get update \
-        && apt-dpkg-wrap apt-get install -y jitsi-upload-integrations jq \
-        && apt-cleanup
+    apt-dpkg-wrap apt-get update \
+    && apt-dpkg-wrap apt-get install -y jitsi-upload-integrations jq \
+    && apt-cleanup
 
 RUN apt-dpkg-wrap apt-get -y install pulseaudio-utils
 
