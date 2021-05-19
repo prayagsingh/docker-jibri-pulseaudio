@@ -70,7 +70,7 @@ services:
             XMPP_TRUST_ALL_CERTS: "true"
             CHROMIUM_FLAGS: "--use-fake-ui-for-media-stream,--start-maximized,--kiosk,--enabled,--disable-infobars,--autoplay-policy=no-user-gesture-required,--no-sandbox,–disable-dev-shm-usage"
             ENABLE_STATS_D: "true"
-            JIBRI_FFMPEG_RESOLUTION: "1920x1080"
+            JIBRI_FFMPEG_RESOLUTION: "1280x720"
             JIBRI_FFMPEG_AUDIO_SOURCE: "pulse"
             JIBRI_FFMPEG_AUDIO_DEVICE: "default"
             PUBLIC_URL: ""

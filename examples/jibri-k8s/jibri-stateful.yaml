@@ -47,7 +47,7 @@ spec:
             - "http://localhost:2222/jibri/api/v1.0/health"
 
         - name: jibri
-          image: prayagsingh/jibri:pulse_v2.2
+          image: prayagsingh/jibri:jibri-pulseaudio:latest
           imagePullPolicy: IfNotPresent
           resources:
             limits:
