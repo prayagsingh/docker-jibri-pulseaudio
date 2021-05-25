@@ -37,10 +37,14 @@ services:
         #     "meet.example.com": "1.2.3.4" # update_this
         environment:
             # rclone config
-            ENABLE_RCLONE: 0
+            ENABLE_RCLONE: 0 # false by default
+            S3_REMOTE_NAME: ""
+            S3_PROVIDER_NAME: ""
+            RCLONE_ENV_AUTH: ""
             AWS_ACCESS_KEY_ID: "" 
             AWS_SECRET_ACCESS_KEY: ""
-            RCLONE_AWS_REGION: ""
+            S3_REGION: ""
+            S3_ENDPOINT: ""
             # jibri config
             XMPP_SERVER: "xmpp.meet.example.com"
             XMPP_DOMAIN: "meet.example.com"

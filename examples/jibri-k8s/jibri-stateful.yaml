@@ -80,11 +80,11 @@ spec:
                 secretKeyRef:
                   name: jibri-secrets
                   key: AWS_SECRET_ACCESS_KEY
-            - name: RCLONE_AWS_REGION
+            - name: S3_REGION
               valueFrom:
                 secretKeyRef:
                   name: jibri-secrets
-                  key: RCLONE_AWS_REGION
+                  key: S3_REGION
           volumeMounts:
             - name: dev-shm
               mountPath: /dev/shm

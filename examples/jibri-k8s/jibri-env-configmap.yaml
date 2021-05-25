@@ -4,7 +4,10 @@ metadata:
   name: jibri-env
   namespace: jitsi
 data:
+  # rclone config
   ENABLE_RCLONE: "1"
+  S3_REMOTE_NAME: "" # amazons3 or custom-name for s3 compatible storage
+  S3_PROVIDER_NAME: "" #AWS or Other
   XMPP_SERVER: prosody
   XMPP_DOMAIN: meet.example.com
   XMPP_AUTH_DOMAIN: auth.meet.example.com
