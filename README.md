@@ -1,5 +1,8 @@
 # Docker Jibri Pulseaudio
 
+[![Docker Image Version](https://img.shields.io/docker/v/prayagsingh/jibri-pulseaudio/latest)](https://hub.docker.com/r/prayagsingh/jibri-pulseaudio/tags) [![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/prayagsingh/jibri-pulseaudio)](https://hub.docker.com/r/prayagsingh/jibri-pulseaudio)
+
+
 #### Run Jibri using PulseAudio.
 
 #### Try `prayagsingh/jibri:pulse_v2.2` docker image. Using unstable build.
@@ -8,9 +11,7 @@
 
 #### Inbuilt Support for streaming to any rtmp server and to facebook too(one at a time). 
 
-#### Inbuilt support for rclone. use rclone to copy the recording to either google drive or S3 bucket. Need to add the logic in finalize.sh file. 
-
-#### Tested with docker-compose and docker-swarm setup. 
+#### Inbuilt support for rclone. use rclone to copy the recording to either google drive or S3 compatible storage. Need to add the logic in finalize.sh file.
 
 **NOTE 1: It is mandatory to map `/dev/shm` else chrome crashes when screen-share is enabled**
 
