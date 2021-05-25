@@ -85,6 +85,11 @@ spec:
                 secretKeyRef:
                   name: jibri-secrets
                   key: S3_REGION
+            - name: S3_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: jibri-secrets
+                  key: S3_ENDPOINT
           volumeMounts:
             - name: dev-shm
               mountPath: /dev/shm
