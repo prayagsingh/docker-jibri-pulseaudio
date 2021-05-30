@@ -28,10 +28,10 @@ spec:
                  operator: In
                  values:
                  - jibri-pool
-      # hostAliases:
-      #   - ip: '1.2.3.4' # update_this 
-      #     hostnames:
-      #       - meet.example.com # update_this
+      hostAliases:
+        - ip: '1.2.3.4' # update_this
+          hostnames:
+            - meet.example.com # update_this
       securityContext:
         fsGroup: 63 
       containers:
