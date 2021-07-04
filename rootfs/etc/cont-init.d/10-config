@@ -49,7 +49,8 @@ if [ $ENABLE_RCLONE -eq 1 ]; then
       chown jibri:jibri /home/jibri/.config/rclone/rclone.conf
 fi
 
-# change the resolution in xorg-video-dummy file
+# change the resolution in xorg-video-dummy file if var is not empty
+[[ ! -z "$XORG_DUMMY_VIDEO_RESOLUTION" ]] &&  \
 sed -i -e "s/Virtual 1920 1080/Virtual ${XORG_DUMMY_VIDEO_RESOLUTION}/g" /etc/jitsi/jibri/xorg-video-dummy.conf
 
 # make recording dir
@@ -61,3 +62,5 @@ chown -R jibri ${JIBRI_RECORDING_DIR}
 [ -z "${JIBRI_LOGS_DIR}" ] && export JIBRI_LOGS_DIR=/config/logs
 mkdir -p ${JIBRI_LOGS_DIR}
 chown -R jibri ${JIBRI_LOGS_DIR}
+
+echo "INFO: Done setting up container using 10-config script"

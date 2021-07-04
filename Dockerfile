@@ -18,13 +18,11 @@ LABEL build_version="Version:- ${RCLONE_VER} Build-date:- ${BUILD_DATE}"
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-RUN \
-    apt-dpkg-wrap apt-get update \
-    && apt-dpkg-wrap apt-get install -y jibri pulseaudio socat dbus dbus-x11 rtkit libgl1-mesa-dri procps unzip wget stunnel4 \
+RUN apt-dpkg-wrap apt-get update \
+    && apt-dpkg-wrap apt-get install -y jibri pulseaudio socat dbus dbus-x11 rtkit procps unzip wget stunnel4 \
     && apt-cleanup
 
-RUN \
-	[ "${CHROME_RELEASE}" = "latest" ] \
+RUN [ "${CHROME_RELEASE}" = "latest" ] \
 	&& wget -q https://dl-ssl.google.com/linux/linux_signing_key.pub -O /etc/apt/trusted.gpg.d/google.asc \
 	&& echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
 	&& apt-dpkg-wrap apt-get update \
@@ -32,16 +30,14 @@ RUN \
 	&& apt-cleanup \
 	|| true
 
-RUN \
-    [ "${CHROME_RELEASE}" != "latest" ] \
+RUN [ "${CHROME_RELEASE}" != "latest" ] \
     && curl -4so "/tmp/google-chrome-stable_${CHROME_RELEASE}-1_amd64.deb" "http://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${CHROME_RELEASE}-1_amd64.deb" \
     && apt-dpkg-wrap apt-get update \
     && apt-dpkg-wrap apt-get install -y "/tmp/google-chrome-stable_${CHROME_RELEASE}-1_amd64.deb" \
     && apt-cleanup \
     || true
 
-RUN \
-    [ "${CHROMEDRIVER_MAJOR_RELEASE}" = "latest" ] \
+RUN [ "${CHROMEDRIVER_MAJOR_RELEASE}" = "latest" ] \
     && CHROMEDRIVER_RELEASE="$(curl -4Ls https://chromedriver.storage.googleapis.com/LATEST_RELEASE)" \
     || CHROMEDRIVER_RELEASE="$(curl -4Ls https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROMEDRIVER_MAJOR_RELEASE})" \
     && curl -4Ls "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_RELEASE}/chromedriver_linux64.zip" \
@@ -49,17 +45,9 @@ RUN \
     && chmod +x /usr/bin/chromedriver \
     && chromedriver --version
 
-RUN \
-    apt-dpkg-wrap apt-get update \
-    && apt-dpkg-wrap apt-get install -y jitsi-upload-integrations jq \
+RUN apt-dpkg-wrap apt-get update \
+    && apt-dpkg-wrap apt-get install -y jitsi-upload-integrations jq pulseaudio-utils \
     && apt-cleanup
-
-RUN apt-dpkg-wrap apt-get -y install pulseaudio-utils
-
-RUN	mkdir -p /root/.config/pulse/  && \	
-	chown -R jibri:jibri /root/.config/pulse && \
-        mkdir -p /home/jibri/.config/pulse && \
-        chown -R jibri:jibri /home/jibri/.config/pulse 
 
 RUN curl -O https://downloads.rclone.org/v${RCLONE_VER}/rclone-v${RCLONE_VER}-linux-${ARCH}.zip && \
     unzip rclone-v${RCLONE_VER}-linux-${ARCH}.zip && \
@@ -71,14 +59,14 @@ RUN curl -O https://downloads.rclone.org/v${RCLONE_VER}/rclone-v${RCLONE_VER}-li
     rm -f rclone-v${RCLONE_VER}-linux-${ARCH}.zip && \
     rm -r rclone-*-linux-${ARCH}
 
-
-RUN mkdir -p /home/jibri/.config/rclone/ && \
-    chown -R jibri:jibri /home/jibri/.config/rclone 
+RUN	mkdir -p /root/.config/pulse/  && \
+	chown -R jibri:jibri /root/.config/pulse && \
+    mkdir -p /home/jibri/.config/pulse && \
+    mkdir -p /home/jibri/.config/rclone/ && \
+    chown -R jibri:jibri /home/jibri/.config/
 
 # copying pulse audio related files
-COPY pjsua.config /etc/jitsi/jibri/
-COPY icewm.preferences /etc/jitsi/jibri/
-COPY asoundrc /etc/jitsi/jibri/
+COPY pulseaudio-config/ /etc/jitsi/jibri/
 
 COPY rootfs/ /
 
@@ -104,8 +92,5 @@ COPY ffmpeg /opt/util/ffmpeg
 RUN mv /usr/bin/ffmpeg /usr/bin/ffmpeg3 && \
     ln -s /opt/util/ffmpeg /usr/bin/ffmpeg && \
     chmod +x /usr/bin/ffmpeg
-
-# changing /home/jibri permission because of pulseaudio. we can not run pulseaudio daemon with jibri user without changing permission
-RUN chown -R jibri:jibri /home/jibri
 
 VOLUME /config

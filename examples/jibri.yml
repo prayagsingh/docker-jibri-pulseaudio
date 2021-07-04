@@ -6,13 +6,10 @@ services:
         restart: "on-failure"
         volumes:
             - ./config:/config:Z
-            #- ./config/rclone/rclone.conf:/home/jibri/.config/rclone/rclone.conf
             - /dev/shm:/dev/shm
         cap_add:
             - SYS_ADMIN
             - NET_BIND_SERVICE
-              #devices:
-              #- /dev/snd:/dev/snd
         extra_hosts:
             - "meet.example.com:1.2.3.4" # update_this
         environment:

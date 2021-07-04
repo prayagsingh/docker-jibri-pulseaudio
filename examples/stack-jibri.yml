@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-    # Video bridge
     jibri:
         image:  prayagsingh/jibri-pulseaudio:latest
         ports:
@@ -81,7 +80,6 @@ services:
             XORG_DUMMY_VIDEO_RESOLUTION: "1280 720"
         volumes:
             - /home/username/config:/config:Z
-            #- /home/username/config/rclone/rclone.conf:/home/jibri/.config/rclone/rclone.conf
             - /dev/shm:/dev/shm
         networks:
             jitsi:
