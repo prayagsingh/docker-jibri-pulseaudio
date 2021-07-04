@@ -97,18 +97,6 @@ spec:
               mountPath: /config/jibri/finalize.sh
               subPath: finalize.sh
               readOnly: false
-            - name: jibri-files
-              mountPath: /etc/jitsi/jibri/xorg-video-dummy.conf
-              subPath: xorg-video-dummy.conf
-              readOnly: false
-            - name: jibri-files
-              mountPath: /defaults/rclone.conf
-              subPath: rclone.conf
-              readOnly: true
-            - name: jibri-files
-              mountPath: /etc/cont-init.d/10-config
-              subPath: 10-config
-              readOnly: false
           securityContext:
             privileged: true
             capabilities:
@@ -127,15 +115,6 @@ spec:
               - key: finalize.sh
                 path: finalize.sh
                 mode: 0755
-              - key: xorg-video-dummy.conf
-                path: xorg-video-dummy.conf
-                mode: 0744
-              - key: rclone.conf
-                path: rclone.conf
-                mode: 0744
-              - key: 10-config
-                path: 10-config
-                mode: 0744
         - name: dev-shm
           hostPath:
             path: "/dev/shm"
