@@ -1,6 +1,6 @@
 #!/bin/bash
 
-COMMAND="/usr/bin/ffmpeg3" 
+COMMAND="/usr/bin/ffmpeg2" 
 
 while test $# -gt 0
 do
