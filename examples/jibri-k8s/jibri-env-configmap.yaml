@@ -34,9 +34,7 @@ data:
   XMPP_TRUST_ALL_CERTS: "true"
   CHROMIUM_FLAGS: "--use-fake-ui-for-media-stream,--start-maximized,--kiosk,--enabled,--disable-infobars,--autoplay-policy=no-user-gesture-required,--no-sandbox,–disable-dev-shm-usage"
   ENABLE_STATS_D: "true"
-  JIBRI_FFMPEG_RESOLUTION: "1280x720" #"1920x1080"
+  JIBRI_RECORDING_RESOLUTION: "1280x720" #"1920x1080"
   JIBRI_FFMPEG_AUDIO_SOURCE: "pulse"
   JIBRI_FFMPEG_AUDIO_DEVICE: "default"
   PUBLIC_URL: ""
-  # this need to be same as JIBRI_FFMPEG_RESOLUTION
-  XORG_DUMMY_VIDEO_RESOLUTION: "1280 720" # 1920 1080

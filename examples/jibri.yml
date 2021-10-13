@@ -51,11 +51,10 @@ services:
             XMPP_TRUST_ALL_CERTS: "true"
             CHROMIUM_FLAGS: "--use-fake-ui-for-media-stream,--start-maximized,--kiosk,--enabled,--disable-infobars,--autoplay-policy=no-user-gesture-required"
             ENABLE_STATS_D: "true"
-            JIBRI_FFMPEG_RESOLUTION: "1280x720"
+            JIBRI_RECORDING_RESOLUTION: "1280x720"
             JIBRI_FFMPEG_AUDIO_SOURCE: "pulse"
             JIBRI_FFMPEG_AUDIO_DEVICE: "default"
             PUBLIC_URL: ""
-            XORG_DUMMY_VIDEO_RESOLUTION: "1280 720"
         networks:
             jitsi:
 networks:
