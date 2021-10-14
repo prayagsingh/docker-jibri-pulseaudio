@@ -1,5 +1,12 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
 <a name="unreleased"></a>
 ## [Unreleased]
+
+### Fix
+- added Heading in CHANGELOG.md file
 
 
 <a name="v1.6.0"></a>
