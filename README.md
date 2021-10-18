@@ -35,7 +35,3 @@
 **K8s resource usage with 1280x720 resolution with 3 participants in a meeting: Stable**
 
 ![Screenshot (619)](https://user-images.githubusercontent.com/8455114/114389163-48a21d80-9bb2-11eb-893f-43b80dae7dfc.png)
-
-**K8s resource usage with 1920x1080 resolution with 3 participants in a meeting: Unstable and Crashed**
-
-![Screenshot (617)](https://user-images.githubusercontent.com/8455114/114389344-843ce780-9bb2-11eb-96ad-5c2a9c947742.png)
