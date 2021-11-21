@@ -3,9 +3,6 @@
 [![Docker Image Version](https://img.shields.io/docker/v/prayagsingh/jibri-pulseaudio/latest)](https://hub.docker.com/r/prayagsingh/jibri-pulseaudio/tags) [![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/prayagsingh/jibri-pulseaudio)](https://hub.docker.com/r/prayagsingh/jibri-pulseaudio)
 
 
-### NOTE:
-***From now onwards i.e repository tag `v1.5.0` docker image uses same tag as mentioned in the github tag name.***
-
 #### Run Jibri using PulseAudio.
 
 #### Please use `prayagsingh/jibri-pulseaudio:latest` for latest changes using unstable build.
