@@ -7,11 +7,17 @@
 
 #### Please use `prayagsingh/jibri-pulseaudio:latest` for latest changes using unstable build.
 
-#### Inbuilt Support for streaming to any rtmp server and to facebook too(one at a time). 
+### Additional Features
 
-#### Inbuilt support for rclone. use rclone to copy the recording to either google drive or S3 compatible storage. Need to add the logic in finalize.sh file.
+* Inbuilt Support for streaming to any rtmp server.
 
-**NOTE 1: It is mandatory to map `/dev/shm` else chrome crashes when screen-share is enabled**
+* Stream to Facebook.
+
+* Inbuilt support for Rclone.
+
+* Store your recordings to any S3 compatible storage.
+
+* Store your recordings to Google Drive.
 
 ### FILES
 
@@ -19,6 +25,8 @@
 2. Use `examples/stack-jibri.yml` with `docker stack deploy`.
 3. Use `examples/jibri-k8s` directory to setup jibri on k8s. Use `examples/jibri-k8s/kustomization.yaml` for deployment. `Kustomize` version is `v4.0.5`.
 4. Look for `update_this` and change the value accordingly. Also change `meet.example.com` with a valid URL.
+
+***NOTE 1: It is mandatory to map `/dev/shm` else chrome crashes when screen-share is enabled***
 
 ***NOTE 2:*** Here I'm using `external` network in both the files. Please change it accordingly. 
 
